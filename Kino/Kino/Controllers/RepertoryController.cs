@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Kino.DAL;
 using Kino.Models;
+using Kino.ViewModels;
 
 namespace Kino.Controllers
 {
@@ -18,14 +19,35 @@ namespace Kino.Controllers
         // GET: Repertory
         public ActionResult Index()
         {
-           
 
-            /* join sala in db.Sala on seans.SalaId equals sala.Id
-                                  join kino in db.Kino on sala.KinoId equals kino.Id
-                                  where kino.Id == (int)Session["Cinema"]*/
+            
 
-
+            //var seanse = 0;
+            //  return Json(seanse, JsonRequestBehavior.AllowGet);
             return PartialView();
+        }
+
+        [HttpGet]
+        public ActionResult getAllSeans()
+        {
+
+            int cinemaID = (int)Session["Cinema"];
+
+            var seanse = from seans in db.Seans
+                         join film in db.Film on seans.FilmId equals film.Id
+                         join sala in db.Sala on seans.SalaId equals sala.Id
+                         where sala.KinoId == cinemaID
+                         select new SeansViewModel()
+                         {
+                             Id = film.Id,
+                             start = seans.Data + " "+seans.Godzina,
+                             end = seans.Data + " " + seans.GodzinaZakonczenia,
+                             title = film.Tytuł
+                         };
+
+            //var seanse = 0;
+            return Json(seanse, JsonRequestBehavior.AllowGet);
+            //return PartialView();
         }
 
         // GET: Repertory/Details/5

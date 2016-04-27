@@ -9,6 +9,7 @@ namespace Kino.Models
     {
         public int Id { get; set; }
         public string Godzina { get; set; }
+        public string GodzinaZakonczenia { get; set; }
         public string Data { get; set; }
         public string Opis { get; set; }       
 
