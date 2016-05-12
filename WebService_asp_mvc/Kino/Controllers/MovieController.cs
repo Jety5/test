@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Kino.DAL;
 using Kino.Models;
+using Newtonsoft.Json;
 
 namespace Kino.Controllers
 {
@@ -21,7 +22,10 @@ namespace Kino.Controllers
             // ModelState.Clear();
             //Session["page"] = "movie";
             var movie = db.Film.ToList();
+            // string output = JsonConvert.SerializeObject(movie);
             return Json(movie, JsonRequestBehavior.AllowGet);
+            
+         //   return PartialView(db.Film.ToList());
         }
 
         // http://localhost:55760/Movie/getAllMovie

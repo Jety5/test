@@ -480,8 +480,14 @@ function addReservation() {
 
 
 }
+/////////////////////////
 
-$('.datepicker').datepicker();
+
+//  $(document).ready(function() {
+
+
+//////////////s
+//$('.datepicker').datepicker();
 /*/
 $('#formAddMovie').submit(function (evt) {
     //prevent the browsers default function
