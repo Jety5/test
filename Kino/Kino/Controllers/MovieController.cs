@@ -16,9 +16,11 @@ namespace Kino.Controllers
         private CinemaContext db = new CinemaContext();
 
         // GET: Movie
-        [Authorize]
+        [HttpGet]
         public ActionResult Index()
         {
+            // ModelState.Clear();
+            //Session["page"] = "movie";
             return PartialView(db.Film.ToList());
         }
 
@@ -66,6 +68,7 @@ namespace Kino.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
+            ModelState.Clear();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -83,12 +86,15 @@ namespace Kino.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,Tytuł,Rok,Reżyser,Opis")] Film film)
         {
+            ModelState.Clear();
             if (ModelState.IsValid)
             {
+               // db.Film
                 db.Entry(film).State = EntityState.Modified;
                 db.SaveChanges();
             //    return PartialView("Index", db.Film.ToList());
             }
+            
             return PartialView("Index", db.Film.ToList());
         }
 

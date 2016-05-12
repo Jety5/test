@@ -8,6 +8,64 @@
 <script src="@Url.Content("~/Scripts/script.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
 
+<script type="text/javascript">
+    function editMovie(id) {
+    // $('#title').html("Edytuj film");
+    //  var id = $('#detailMovie').val();
+    //var id = 184;
+    $.ajax({
+    url: "../Movie/Edit?id=" + id
+    }).done(function (data) {
+    $('#editModal .detailCinema').html(data);
+
+    });
+
+    $("#editModal").dialog({
+    height:340,
+    width: 430,
+    title: 'Edytuj film'
+    });
+
+    }
+
+    function deleteMovie(id) {
+        //$('#title').html("Szczegóły filmu");
+        //  var id = $('#detailMovie').val();
+        $.ajax({
+            url: "../Movie/Delete?id=" + id
+        }).done(function (data) {
+            $('#deleteModal .detailCinema').html(data);
+
+        });
+
+
+        $("#deleteModal").dialog({
+            title: 'Usun film'
+        });
+
+    }
+
+    function addMovie() {
+        // $('#title').html("Edytuj film");
+        //  var id = $('#detailMovie').val();
+        $.ajax({
+            url: "../Movie/Create"
+        }).done(function (data) {
+            $('#addModal .detailCinema').html(data);
+
+        });
+
+
+        $("#addModal").dialog({
+            height: 340,
+            width: 430,
+            title: 'Dodaj film'
+        });
+
+
+
+    }
+</script>
 
 <a href="#DodajFilm" id="addMovie" class="action-button shadow animate blue" style="text-decoration:none" onclick="addMovie()">Dodaj film</a>
 
@@ -50,7 +108,7 @@
                 @Html.DisplayFor(modelItem => item.Opis)
             </td>
             <td>
-                <a href="#EdytujFilm" id="addMovie" class="action-button shadow animate blue" style="text-decoration:none" onclick="editMovie(@item.Id)">Edytuj</a>
+                <a href="#EdytujFilm" id="edMovie" class="action-button shadow animate blue" style="text-decoration:none" onclick="editMovie(@item.Id);">Edytuj</a>
                 <a href="#SzczegolyFilm" id="detailMovie"  class="action-button shadow animate blue" style="text-decoration:none" onclick="getDetailsMovie(@item.Id)">Szczegóły</a>
                 <a href="#UsunFilm" class="action-button shadow animate blue" style="text-decoration:none" onclick="deleteMovie(@item.Id)">Usuń</a>
             </td>
@@ -62,7 +120,7 @@
 
 <!--<div id="detailModal" class="modal">
 
-    <!-- Modal content 
+    <!-- Modal content
     <div class="modal-content">
         <span class="close_detail">×</span>
         <p>
@@ -71,7 +129,7 @@
         <div class="detailCinema"></div>
 
         <p style="margin-bottom: 35px;">
-           
+
         </p>
     </div>
 
@@ -92,3 +150,4 @@
 <div id="addModal" title="Dodaj film">
     <div class="detailCinema"></div>
 </div>
+

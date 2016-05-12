@@ -226,11 +226,32 @@ function detailsReservation(id) {
 
 
 }
+/*/$('#edMovie').click(function (event) {
+   // event.preventDefault();
+    var id =184;
+    $.ajax({
+        url: "../Movie/Edit?id=" + id
+    }).done(function (data) {
+        $('#editModal .detailCinema').html(data);
 
-function editMovie(id) {
+    });
+   
+    
+    $("#editModal").dialog({
+        height:340,
+        width: 430,
+        title: 'Edytuj film'
+    }
+    //here you can also do all sort of things 
+});*/
+
+
+
+/*function editMovie(id) {
    // $('#title').html("Edytuj film");
     //  var id = $('#detailMovie').val();
-    $.ajax({
+    //var id = 184;
+   $.ajax({
         url: "../Movie/Edit?id=" + id
     }).done(function (data) {
         $('#editModal .detailCinema').html(data);
@@ -246,8 +267,8 @@ function editMovie(id) {
 
 
    
-}
-function addMovie() {
+}*/
+/*function addMovie() {
     // $('#title').html("Edytuj film");
     //  var id = $('#detailMovie').val();
     $.ajax({
@@ -266,10 +287,10 @@ function addMovie() {
 
 
 
-}
+}*/
 
 
-function deleteMovie(id) {
+/*function deleteMovie(id) {
     //$('#title').html("Szczegóły filmu");
     //  var id = $('#detailMovie').val();
     $.ajax({
@@ -284,7 +305,7 @@ function deleteMovie(id) {
         title: 'Usun film'
     });
 
-}
+}*/
 
 
 
@@ -292,7 +313,7 @@ function deleteMovie(id) {
 
 
 
-function deleteMovieForm(id) {
+/*function deleteMovieForm(id) {
 
     $.ajax({
         url: "../Movie/DeleteConfirmed?id=" + id,
@@ -305,32 +326,59 @@ function deleteMovieForm(id) {
 
    
    
-}
+}*/
 
 //edytuj film
-$("#editMovieButton").click('submit', function (e) {
+/*function editMov() {
+    //e.preventDefault();
+    //var form = $("#formEditMovie").serialize();
+   
+    alert($("#formEditMovie").serialize());
+    //$("#formEditMovie")
+    $.ajax({
+        type: "POST",
+        async: false,
+        cache: false,
+        url: "../Movie/Edit",
+        data: $("#formEditMovie").serialize(),
+        success: function (data) {
+            
+            // data is ur summary
+            //alert(data);
+            showFilms();
+            
+            //debugger;
+        }
 
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: "../Movie/Edit",
-            data: $("#formEditMovie").serialize(),
-            success: function (data) {
-                // data is ur summary
-                //alert(data);
-                showFilms();
-                //debugger;
-            }
-
-
-        });
 
     });
+    document.getElementById("formEditMovie").reset();
+    return false;
+}*/
+
+/*$("#editMovieButton").click('submit', function (e) {
+
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "../Movie/Edit",
+        data: $("#formEditMovie").serialize(),
+        success: function (data) {
+            // data is ur summary
+            //alert(data);
+            showFilms();
+            //debugger;
+        }
+
+
+    });
+
+});*/
 
 
 //edytuj rezerwacje
 
-$("#editReservationButton").click('submit', function (e) {
+/*$("#editReservationButton").click('submit', function (e) {
 
     e.preventDefault();
     $.ajax({
@@ -347,12 +395,12 @@ $("#editReservationButton").click('submit', function (e) {
 
     });
 
-});
+});*/
 
 
 //dodajFilm
 
-$("#addMovieButton").click('submit', function (e) {
+/*$("#addMovieButton").click('submit', function (e) {
 
         e.preventDefault();  
         $.ajax({
@@ -369,28 +417,32 @@ $("#addMovieButton").click('submit', function (e) {
 
         });
         
-    });
+    });*/
 
 
-function showFilms(){
+/*function showFilms() {
+
     $.ajax({
-        //    type: "POST",
+        //type: "POST",
         url: "../Movie/Index",
-        // data: dataString,
-        //   dataType: "json",
-        //   traditional: true,
-    }).done(function (data) {
-        // console.log(data);
-        //
-        $(".ui-dialog").hide();
-        $('#page-content-wrapper').html(data);
-        //$(".ui-dialog").hide();
+       // data: $("#formAddMovie").serialize(),
+        success: function (data) {
+            // data is ur summary
+            //alert(data);
+            location.reload();
+            $(".ui-dialog").hide();
+            $('#page-content-wrapper').html(data);
+            //debugger;
+        }
+
 
     });
 
-}
+   
 
-function showReservation() {
+}*/
+
+/*function showReservation() {
     $.ajax({
         //    type: "POST",
         url: "../Reservation/Index",
@@ -406,7 +458,7 @@ function showReservation() {
 
     });
 
-}
+}*/
 
 function addReservation() {
     // $('#title').html("Edytuj film");

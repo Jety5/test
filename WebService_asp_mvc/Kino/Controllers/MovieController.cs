@@ -15,6 +15,15 @@ namespace Kino.Controllers
     {
         private CinemaContext db = new CinemaContext();
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult Index()
+        {
+            // ModelState.Clear();
+            //Session["page"] = "movie";
+            var movie = db.Film.ToList();
+            return Json(movie, JsonRequestBehavior.AllowGet);
+        }
+
         // http://localhost:55760/Movie/getAllMovie
         [HttpGet]
         public ActionResult getAllMovie()
@@ -34,6 +43,7 @@ namespace Kino.Controllers
 
             return Json(film, JsonRequestBehavior.AllowGet);
         }
+
 
         // GET: Movie/Create
         public ActionResult Create()

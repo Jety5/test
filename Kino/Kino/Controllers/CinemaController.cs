@@ -15,6 +15,7 @@ namespace Kino.Controllers
         public ActionResult Index()
         {
             var cinema = db.Kino.ToList();
+           // Session["page"] = " ";
             return View(cinema);
         }
 
@@ -22,8 +23,19 @@ namespace Kino.Controllers
         public ActionResult Main(int CinemaId)
         {
             Models.Kino kino = db.Kino.Find(CinemaId);
-            Session["Cinema"] = CinemaId;
-            return View(kino);
+           Session["Cinema"] = CinemaId;
+           //   string page = Session["page"].ToString();
+          //  if (page == "movie")
+         //   {
+                
+          //      return View("Movie/Index",db.Film.ToList());
+
+         //   }
+         //   else
+         //   {
+                return View(kino);
+           // }
+           
         }       
         
         [HttpGet]

@@ -2,11 +2,52 @@
 
 <script src="~/Scripts/bootstrap.min.js"></script>
 <link href="~/Content/jquery-ui.css" rel="stylesheet" />
-<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
+<!--<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
 <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 <script src="@Url.Content("~/Scripts/script.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>-->
 
+<script type="text/javascript">
+
+    $("#formEditReservation").find("#editReservationButton").click(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "../Reservation/Edit",
+            data: $("#formEditReservation").serialize(),
+            success: function (data) {
+                // data is ur summary
+                //alert(data);
+                showReservation();
+                //debugger;
+            }
+
+
+        });
+
+    });
+
+    function showReservation() {
+        $.ajax({
+            //    type: "POST",
+            url: "../Reservation/Index",
+            // data: dataString,
+            //   dataType: "json",
+            //   traditional: true,
+        }).done(function (data) {
+            // console.log(data);
+            //
+            $(".ui-dialog").hide();
+            $('#page-content-wrapper').html(data);
+            //$(".ui-dialog").hide();
+
+        });
+
+    }
+
+    
+
+</script>
 <form class="form-horizontal" id="formEditReservation">
     <br />
 @for (int i = 0; i < Model.Count; i++)
@@ -36,7 +77,8 @@
 
     <div class="form-group">
         <div style="margin-left: 71%;">
-            <input type="submit" value="Edytuj" id="editReservationButton" class="btn btn-primary" />
+            <a href="#" id="editReservationButton" class="action-button shadow animate blue" style="text-decoration:none">Edytuj</a>
+
         </div>
     </div>
 }

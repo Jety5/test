@@ -273,6 +273,7 @@
     <Content Include="Views\Repertory\Details.cshtml" />
     <Content Include="Views\Repertory\Edit.cshtml" />
     <Content Include="Views\Repertory\Index.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
