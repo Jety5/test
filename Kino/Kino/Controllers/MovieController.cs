@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using Kino.DAL;
 using Kino.Models;
+using System.IO;
+using System.Text;
+using System.Web.UI;
 
 namespace Kino.Controllers
 {
@@ -22,6 +25,34 @@ namespace Kino.Controllers
             // ModelState.Clear();
             //Session["page"] = "movie";
             return PartialView(db.Film.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult ReloadMovie(IEnumerable<Film> Film)
+        {
+
+            // string view=RenderRazorViewToString("Index", Film);
+            //  return Json(new { Url = view });
+            //var partial = RenderPartialViewToString(MovieController controler,"_Index", Film);
+           // return Json(new {  Url = RenderRazorViewToString("Index",Film) });
+
+            return PartialView("Index", Film);
+        }
+
+
+        public string RenderRazorViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
 
         // GET: Movie/Details/5

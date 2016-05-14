@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Kino.ViewModels.DetailsReservationViewModel>
+
+<div>
+    <dl class="dl-horizontal">
+@foreach (var item in Model)
+{
+        <dt>
+            @Html.DisplayNameFor(model => model.IdRezerwacji)       
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => item.IdRezerwacji)      
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Godzina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelItem => item.Godzina)   
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelItem => item.Data)   
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelItem => item.Opis)   
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TytulFilmu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(modelItem => item.TytulFilmu)   
+        </dd>
+}
+    </dl>
+</div>
+

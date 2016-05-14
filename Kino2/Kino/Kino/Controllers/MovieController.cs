@@ -8,7 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using Kino.DAL;
 using Kino.Models;
-using Newtonsoft.Json;
+using System.IO;
+using System.Text;
+using System.Web.UI;
 
 namespace Kino.Controllers
 {
@@ -16,37 +18,48 @@ namespace Kino.Controllers
     {
         private CinemaContext db = new CinemaContext();
 
-        [AcceptVerbs(HttpVerbs.Get)]
-        public JsonResult Index()
+        // GET: Movie
+        //[HttpGet]
+        [Authorize]      
+        public ActionResult Index()
         {
             // ModelState.Clear();
             //Session["page"] = "movie";
-            var movie = db.Film.ToList();
-            // string output = JsonConvert.SerializeObject(movie);
-            return Json(movie, JsonRequestBehavior.AllowGet);
-          
+            return View(db.Film.ToList());
+        }
+       
+
+
+        public string RenderRazorViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
 
-        // http://localhost:55760/Movie/getAllMovie
+        // GET: Movie/Details/5
         [HttpGet]
-        public ActionResult getAllMovie()
+        public ActionResult Details(int? id)
         {
-            var movie = db.Film.ToList();
-           
-            return Json(movie, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: http://localhost:55760/Cinema/getMovieById?MovieId=1
-        [HttpGet]
-        public ActionResult getMovieById(int? id)
-        {
-           
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             Film film = db.Film.Find(id);
-
-
-            return Json(film, JsonRequestBehavior.AllowGet);
+            if (film == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(film);
         }
-
 
         // GET: Movie/Create
         public ActionResult Create()
@@ -58,7 +71,8 @@ namespace Kino.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]    
-        public ActionResult Create([Bind(Include = "Id,Tytuł,Rok,Reżyser,Opis")] Film film)
+        [Authorize]
+        public ActionResult Create(Film film)
         {
             if (ModelState.IsValid)
             {
@@ -75,6 +89,7 @@ namespace Kino.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
+            ModelState.Clear();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,12 +107,15 @@ namespace Kino.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,Tytuł,Rok,Reżyser,Opis")] Film film)
         {
+            ModelState.Clear();
             if (ModelState.IsValid)
             {
+               // db.Film
                 db.Entry(film).State = EntityState.Modified;
                 db.SaveChanges();
             //    return PartialView("Index", db.Film.ToList());
             }
+            
             return PartialView("Index", db.Film.ToList());
         }
 

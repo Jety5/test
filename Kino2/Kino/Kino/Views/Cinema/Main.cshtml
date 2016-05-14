@@ -1,0 +1,25 @@
+﻿@using Kino.Models
+@model Kino
+
+@{
+    ViewBag.Title = "Main";}
+
+
+                 
+                    <div id="wrapper">
+                        @Html.Partial("_Sidebar")
+                        <!-- Page Content -->
+                        <div id="page-content-wrapper" onload="getCinemaName()">
+                            <div class="container-fluid xyz">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="desc_Cinema">@Model.Nazwa</div>
+                                        <div class="adr_Cinema">@Model.Adres</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /#page-content-wrapper -->
+                    </div>
+    @Session["Cinema"]=@Model.Id;

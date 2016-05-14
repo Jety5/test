@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Kino.ViewModels.DetailsReservationViewModel>
+
+@foreach (var item in Model)
+{
+<form onclick="deleteReservationForm(@Html.DisplayFor(model => item.IdRezerwacji))">
+    <h3>Czy na pewno chcesz usuń tą rezerwację?</h3>
+
+        <dl class="dl-horizontal">
+           
+                <dt>
+                    @Html.DisplayNameFor(model => model.IdRezerwacji)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => item.IdRezerwacji)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Godzina)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => item.Godzina)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Data)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => item.Data)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Opis)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => item.Opis)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TytulFilmu)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => item.TytulFilmu)
+                </dd>
+
+          
+        </dl>
+            <div class="form-actions no-color">
+                <div class="col-md-offset-9 ">
+                    <input type="submit" value="Usun" id="deleteReserv" class="btn btn-primary" />
+                </div>
+            </div>                     
+    </form>
+}

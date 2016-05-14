@@ -38,32 +38,7 @@
                 // });
                 showFilms();
         }
-       /* function editMov() {
-            //e.preventDefault();
-            //var form = $("#formEditMovie").serialize();
-
-            //  alert($("#formEditMovie").serialize());
-            //$("#formEditMovie")
-            $.ajax({
-                type: "POST",
-                async: false,
-                cache: false,
-                url: "http://localhost:8083/Movie/Edit",
-                data: $("#formEditMovie").serialize(),
-                success: function (data) {
-
-                    // data is ur summary
-                    //alert(data);
-                    showFilms();
-
-                    //debugger;
-                }
-
-
-            });
-            // document.getElementById("formEditMovie").reset();
-            // return false;
-        }*/
+       
 
         function showFilms() {
            
@@ -85,15 +60,15 @@
                 //dataType: 'jsonp',
                 url: "http://localhost:8083/Movie/Index",
               //  data: "",
-               // type: 'get',
-              //  dataType: 'jsonp',
+               // type: 'get',                
                 // data: $("#formAddMovie").serialize(),
                 success: function (data) {
+                    show(data);
                    // alert("dydry");
                     // data is ur summary
                     //alert(data);
                     //  location.reload();
-                  //  $(".ui-dialog").hide();
+                 //  $(".ui-dialog").hide();
                    // $('#page-content-wrapper').html(data);
                     //debugger;
                 }
@@ -104,6 +79,37 @@
 
 
         }
+
+        function show(data) {
+            $.ajax({
+                //dataType: 'jsonp',
+                type: "POST",
+                url: "../Movie/ReloadMovie",
+                data: JSON.stringify(data),
+                dataType: 'text',
+                contentType: 'application/json, charset=utf-8',               
+                success: function (data) {
+                    //var obj = jQuery.parseJSON(data);
+                   // alert(data.Url);
+                    //alert(data.Url);
+                   // alert(data);
+                    // alert("dydry");
+                    // data is ur summary
+                    //alert(data);
+                    //  location.reload();
+                    $(".ui-dialog").hide();
+                  //  $.post(data.Url, function (partial) {
+                      $('#page-content-wrapper').html(data);
+                   // });
+                    // $('#page-content-wrapper').html(data);
+                    //debugger;
+                }
+            });
+
+
+
+        }
+        
    // });
 </script>
 

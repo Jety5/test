@@ -1,0 +1,39 @@
+﻿@using Kino.Models
+@model User
+
+<!--x@RenderSection("Scripts", false)
+section ScriptBottom{
+    
+<script src="~/Scripts/jquery-2.2.0.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}-->
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+@Html.AntiForgeryToken()
+<div class="login-form">
+    <div class="header">
+        <h1>Zaloguj się </h1>
+        <span>Proszę wypełnić formularz</span>
+    </div>
+
+    <div class="content">
+        @Html.TextBoxFor(m => m.Email, new { @class = "input username" , @placeholder = "Login" })
+        <div class="user-icon"></div>
+        @Html.PasswordFor(m => m.Password, new { @class = "input username", @placeholder = "Hasło" })
+        <div class="pass-icon"></div>
+    </div>
+
+    <div class="footer">
+        <button class="btn pull-right" type="reset">
+            <i class="icon-remove"></i>
+            Wyczyść
+        </button>
+        <button id="id_login_btn" class="btn btn-primary" type="submit" name="loginForm">
+            <i class="icon-user icon-white"></i>
+            Zaloguj
+        </button>
+
+    </div>
+</div>
+}
