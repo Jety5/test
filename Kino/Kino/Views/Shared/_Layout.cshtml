@@ -26,13 +26,14 @@
                     </button>
                     <a class="navbar-brand" href="#" style="color:whitesmoke;">Menu</a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="navbar-collapse collapse" style="margin-right: 20px;">
                     @if (User.Identity.IsAuthenticated)
             {
 
                         <ul class="nav navbar-nav">
                             <li class="active"><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
                         </ul>
+
 
                     }
                     <!-- <ul class="nav navbar-nav navbar-right">
@@ -72,8 +73,11 @@
 
             <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
             <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+            <script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
             <script src="@Url.Content("~/Scripts/script.js")"></script>
+
             @RenderSection("Scripts", false)
+ 
         </div>
     </body>
 </html>

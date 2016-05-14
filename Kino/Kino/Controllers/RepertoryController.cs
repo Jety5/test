@@ -15,16 +15,12 @@ namespace Kino.Controllers
     public class RepertoryController : Controller
     {
         private CinemaContext db = new CinemaContext();
-        
+
         // GET: Repertory
+        [Authorize]
         public ActionResult Index()
-        {
-
-            
-
-            //var seanse = 0;
-            //  return Json(seanse, JsonRequestBehavior.AllowGet);
-            return PartialView();
+        {          
+            return View();
         }
 
         [HttpGet]
@@ -135,7 +131,7 @@ namespace Kino.Controllers
         }
 
         // POST: Repertory/Delete/5
-        [HttpPost, ActionName("Delete")]
+       /* [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -143,6 +139,19 @@ namespace Kino.Controllers
             db.Seans.Remove(seans);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }*/
+
+
+        [HttpGet]
+        public void DeleteConfirmed(int id)
+        {
+            RezerwacjaPrzyjeta rezerwacjaprzyjeta = db.RezerwacjaPrzyjeta.Find(id);
+            db.RezerwacjaPrzyjeta.Remove(rezerwacjaprzyjeta);
+            db.SaveChanges();
+            RezerwacjaZlozona rezerwacjazlozona = db.RezerwacjaZlozona.Find(id);
+            db.RezerwacjaZlozona.Remove(rezerwacjazlozona);
+            db.SaveChanges();
+           // return PartialView("Index", db.Film.ToList());
         }
 
         protected override void Dispose(bool disposing)

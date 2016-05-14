@@ -1,60 +1,9 @@
 ﻿@model Kino.Models.Film
 
-<!--<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
 <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
-<script src="@Url.Content("~/Scripts/script.js")"></script>-->
-<script type="text/javascript">
-  
-
-    $("#formAddMovie").find("#addMovieButton").click(function () {
-            
-
-               
-                $.ajax({
-                    type: "POST",
-                    url: "../Movie/Create",
-                    data: $("#formAddMovie").serialize(),
-                    success: function (data) {
-                        // data is ur summary
-                        //alert(data);
-                        showFilms();
-                        //debugger;
-                    }
-
-
-                });
-
-            });
-       
-
-            // document.getElementById("formEditMovie").reset();
-            // return false;
-        
-
-        function showFilms() {
-
-            $.ajax({
-                //type: "POST",
-                url: "../Movie/Index",
-                // data: $("#formAddMovie").serialize(),
-                success: function (data) {
-                    // data is ur summary
-                    //alert(data);
-                    //  location.reload();
-                    $(".ui-dialog").hide();
-                    $('#page-content-wrapper').html(data);
-                    //debugger;
-                }
-
-
-            });
-
-
-
-        }
-
-</script>
+<script src="@Url.Content("~/Scripts/script.js")"></script>
 
     <form class="form-horizontal" id="formAddMovie">
     <br />

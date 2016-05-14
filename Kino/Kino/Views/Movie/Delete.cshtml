@@ -1,80 +1,15 @@
 ﻿@model Kino.Models.Film
 
 
-<!--<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
 <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
-<script src="@Url.Content("~/Scripts/script.js")"></script>-->
+<script src="@Url.Content("~/Scripts/script.js")"></script>
 
 <script type="text/javascript">
   
 
-            function deleteMovieForm(id) {
-
-                $.ajax({
-                    url: "../Movie/DeleteConfirmed?id=" + id,
-                }).done(function (data) {
-                    showFilms();
-                    //  $(".ui-dialog").hide();
-                    // $('#page-content-wrapper').html(data);
-
-                });
-
-
-
-            }
-     
-
-      /*  function editMov() {
-            //e.preventDefault();
-            //var form = $("#formEditMovie").serialize();
-
-            //  alert($("#formEditMovie").serialize());
-            //$("#formEditMovie")
-            $.ajax({
-                type: "POST",
-                async: false,
-                cache: false,
-                url: "../Movie/Edit",
-                data: $("#formEditMovie").serialize(),
-                success: function (data) {
-
-                    // data is ur summary
-                    //alert(data);
-                    showFilms();
-
-                    //debugger;
-                }
-
-
-            });
-            // document.getElementById("formEditMovie").reset();
-            // return false;
-        }*/
-
-        function showFilms() {
-
-            $.ajax({
-                //type: "POST",
-                url: "../Movie/Index",
-                // data: $("#formAddMovie").serialize(),
-                success: function (data) {
-                    // data is ur summary
-                    //alert(data);
-                    //  location.reload();
-                    $(".ui-dialog").hide();
-                    $('#page-content-wrapper').html(data);
-                    //debugger;
-                }
-
-
-            });
-
-
-
-        }
-   
-</script>
+   </script>
 
 <form onclick="deleteMovieForm(@Html.DisplayFor(model => model.Id))">
 

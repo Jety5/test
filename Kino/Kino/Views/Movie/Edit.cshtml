@@ -1,161 +1,53 @@
 ﻿@model Kino.Models.Film
 
-<!--<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
 <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
-<!--<script src="@Url.Content("~/Scripts/script.js")"></script>-->
-
-<script type="text/javascript">
-  //  $(document).ready(function() {
-
-       // $("#formEditMovie").find("#editMovieButton").click(function () {
-            function editFilm(){
-                $.ajax({
-                    type: "POST",
-                    // async: false,
-                    //  cache: false,
-                    url: "http://localhost:8083/Movie/Edit",
-                    data: $("#formEditMovie").serialize(),
-                }).done(function (data) {
-                    //alert("asdasdasd");
-
-                });
-                //   success: function (data) {
-                  
-                // data is ur summary
-                //alert(data);
-                //$('#editModal .detailCinema').html(data);
-                  
-                   
-                //debugger;
-                //  }
+<script src="@Url.Content("~/Scripts/script.js")"></script>
 
 
-           
-                // showFilms();
-                // showFilms();
-          
-                // });
-                showFilms();
-        }
-       
+    <form class="form-horizontal" id="formEditMovie">
+    <br />
 
-        function showFilms() {
-           
-           // $.getJSON("http://localhost:8083/Movie/getAllMovie", function (data) {
-             //   alert(data);
-               // var items = [];
-               // $.each(data, function (key, val) {
-                 //   items.push("<li id='" + key + "'>" + val + "</li>");
-               // });
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
 
-               // $("<ul/>", {
-                 //   "class": "my-new-list",
-                   // html: items.join("")
-               // }).appendTo("body");
-            //});
-
-            $.ajax({
-                //type: "POST",               
-                //dataType: 'jsonp',
-                url: "http://localhost:8083/Movie/Index",
-              //  data: "",
-               // type: 'get',                
-                // data: $("#formAddMovie").serialize(),
-                success: function (data) {
-                    show(data);
-                   // alert("dydry");
-                    // data is ur summary
-                    //alert(data);
-                    //  location.reload();
-                 //  $(".ui-dialog").hide();
-                   // $('#page-content-wrapper').html(data);
-                    //debugger;
-                }
-
-
-            });
-
-
-
-        }
-
-        function show(data) {
-            $.ajax({
-                //dataType: 'jsonp',
-                type: "POST",
-                url: "../Movie/ReloadMovie",
-                data: JSON.stringify(data),
-                dataType: 'text',
-                contentType: 'application/json, charset=utf-8',               
-                success: function (data) {
-                    //var obj = jQuery.parseJSON(data);
-                   // alert(data.Url);
-                    //alert(data.Url);
-                   // alert(data);
-                    // alert("dydry");
-                    // data is ur summary
-                    //alert(data);
-                    //  location.reload();
-                    $(".ui-dialog").hide();
-                  //  $.post(data.Url, function (partial) {
-                      $('#page-content-wrapper').html(data);
-                   // });
-                    // $('#page-content-wrapper').html(data);
-                    //debugger;
-                }
-            });
-
-
-
-        }
-        
-   // });
-</script>
-
-    <form class="form-horizontal" id="formEditMovie" >
-       <br/>
-       
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tytuł, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tytuł, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tytuł, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tytuł, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Tytuł, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Tytuł, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Rok, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Rok, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Rok, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Rok, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Rok, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Rok, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Reżyser, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Reżyser, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Reżyser, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Reżyser, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Reżyser, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Reżyser, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Opis, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Opis, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Opis, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Opis, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Opis, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Opis, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-           <div style="margin-left: 81%;">
-               <button onclick="editFilm()" type=button>Edytuj</button>
-                   <a href="#" id="editMovieButton" class="action-button shadow animate blue" style="text-decoration:none" onclick="editFilm()">Edytuj</a>
-        </div>
-        </div>
-    </form>
+    <div class="form-group">
+        <div style="margin-left: 81%;">
+            <a href="#" id="editMovieButton" class="action-button shadow animate blue" style="text-decoration:none">Edytuj</a>
+           </div>
+    </div>
+</form>
 

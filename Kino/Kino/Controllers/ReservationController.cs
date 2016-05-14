@@ -17,6 +17,7 @@ namespace Kino.Controllers
         private CinemaContext db = new CinemaContext();
 
         // GET: Reservation
+        [Authorize]
         public ActionResult Index()
         {
             int cinemaID = (int)Session["Cinema"];
@@ -37,7 +38,7 @@ namespace Kino.Controllers
                                     OpisRezerwacji = rezerwacja.Opis
 
                                  };
-            return PartialView(reservationList.ToList());
+            return View(reservationList.ToList());
         }
 
         // GET: Reservation/Details/5
@@ -181,29 +182,49 @@ namespace Kino.Controllers
         }
 
         // GET: Reservation/Delete/5
+        [HttpGet]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Seans seans = db.Seans.Find(id);
-            if (seans == null)
-            {
-                return HttpNotFound();
-            }
-            return View(seans);
+            //Seans seans = db.Seans.Find(id);
+            //if (seans == null)
+            //  {
+            //     return HttpNotFound();
+            //  }
+
+            int cinemaID = (int)Session["Cinema"];
+
+            var detailReservation = from seans in db.Seans
+                                    join rezerwacja in db.RezerwacjaPrzyjeta on seans.Id equals rezerwacja.SeansId
+                                    join film in db.Film on seans.FilmId equals film.Id
+                                    join sala in db.Sala on seans.SalaId equals sala.Id
+                                    where sala.KinoId == cinemaID
+                                    where rezerwacja.Id == id
+                                    select new DetailsReservationViewModel()
+                                    {
+                                        IdRezerwacji = rezerwacja.Id,
+                                        Godzina = seans.Godzina,
+                                        Data = seans.Data,
+                                        //Opis rezerwacji
+                                        Opis = rezerwacja.Opis,
+                                        TytulFilmu = film.Tytuł
+                                    };
+            return PartialView(detailReservation);
         }
 
-        // POST: Reservation/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpGet]
+        public void DeleteConfirmed(int id)
         {
-            Seans seans = db.Seans.Find(id);
-            db.Seans.Remove(seans);
+            RezerwacjaPrzyjeta rezerwacjaprzyjeta = db.RezerwacjaPrzyjeta.Find(id);
+            db.RezerwacjaPrzyjeta.Remove(rezerwacjaprzyjeta);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            RezerwacjaZlozona rezerwacjazlozona = db.RezerwacjaZlozona.Find(id);
+            db.RezerwacjaZlozona.Remove(rezerwacjazlozona);
+            db.SaveChanges();
+            // return PartialView("Index", db.Film.ToList());
         }
 
         protected override void Dispose(bool disposing)

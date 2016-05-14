@@ -19,25 +19,15 @@ namespace Kino.Controllers
         private CinemaContext db = new CinemaContext();
 
         // GET: Movie
-        [HttpGet]
+        //[HttpGet]
+        [Authorize]      
         public ActionResult Index()
         {
             // ModelState.Clear();
             //Session["page"] = "movie";
-            return PartialView(db.Film.ToList());
+            return View(db.Film.ToList());
         }
-
-        [HttpPost]
-        public ActionResult ReloadMovie(IEnumerable<Film> Film)
-        {
-
-            // string view=RenderRazorViewToString("Index", Film);
-            //  return Json(new { Url = view });
-            //var partial = RenderPartialViewToString(MovieController controler,"_Index", Film);
-           // return Json(new {  Url = RenderRazorViewToString("Index",Film) });
-
-            return PartialView("Index", Film);
-        }
+       
 
 
         public string RenderRazorViewToString(string viewName, object model)

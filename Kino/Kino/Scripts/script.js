@@ -208,6 +208,26 @@ function editReservation(id) {
 
 
 }
+
+function deleteReservation(id) {
+    // $('#title').html("Edytuj film");
+    //  var id = $('#detailMovie').val();
+    $.ajax({
+        url: "../Reservation/Delete?id=" + id
+    }).done(function (data) {
+        $('#deleteReservation .deleteReservation').html(data);
+
+    });
+
+
+    $("#deleteReservation").dialog({
+        title: 'Usuń rezerwację'
+    });
+
+
+   
+
+}
 function detailsReservation(id) {
     // $('#title').html("Edytuj film");
     //  var id = $('#detailMovie').val();
@@ -307,6 +327,162 @@ function detailsReservation(id) {
 
 }*/
 
+$("#formAddMovie").find("#addMovieButton").click(function () {
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "../Movie/Create",
+        data: $("#formAddMovie").serialize(),
+        success: function (data) {
+            // data is ur summary
+            //alert(data);
+            location.reload();
+            //debugger;
+        }
+
+
+    });
+
+});
+
+function deleteMovieForm(id) {
+
+    $.ajax({
+        url: "../Movie/DeleteConfirmed?id=" + id,
+    }).done(function (data) {
+        //showFilms();
+        location.reload();
+        //  $(".ui-dialog").hide();
+        // $('#page-content-wrapper').html(data);
+
+    });
+
+
+
+}
+function deleteReservationForm(id) {
+
+    $.ajax({
+        url: "../Reservation/DeleteConfirmed?id=" + id,
+    }).done(function (data) {
+        //showFilms();
+        location.reload();
+        //  $(".ui-dialog").hide();
+        // $('#page-content-wrapper').html(data);
+
+    });
+
+
+
+}
+
+$("#formEditMovie").find("#editMovieButton").click(function () {
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "../Movie/Edit",
+        data: $("#formEditMovie").serialize(),
+        success: function (data) {
+            // data is ur summary
+            //alert(data);
+            location.reload();
+            //debugger;
+        }
+
+
+    });
+
+});
+
+
+function editMovie(id) {
+    // $('#title').html("Edytuj film");
+    //  var id = $('#detailMovie').val();
+    //var id = 184;
+    $.ajax({
+        url: "../Movie/Edit?id=" + id
+    }).done(function (data) {
+        $('#editModal .detailCinema').html(data);
+
+    });
+
+    $("#editModal").dialog({
+        height: 340,
+        width: 430,
+        title: 'Edytuj film'
+    });
+
+}
+
+function deleteMovie(id) {
+    //$('#title').html("Szczegóły filmu");
+    //  var id = $('#detailMovie').val();
+    $.ajax({
+        url: "../Movie/Delete?id=" + id
+    }).done(function (data) {
+        $('#deleteModal .detailCinema').html(data);
+
+    });
+
+
+    $("#deleteModal").dialog({
+        title: 'Usun film'
+    });
+
+}
+
+function addMovie() {
+    // $('#title').html("Edytuj film");
+    //  var id = $('#detailMovie').val();
+    $.ajax({
+        url: "../Movie/Create"
+    }).done(function (data) {
+        $('#addModal .detailCinema').html(data);
+
+    });
+
+
+    $("#addModal").dialog({
+        height: 340,
+        width: 430,
+        title: 'Dodaj film'
+    });
+
+
+
+}
+
+
+/*  function editMov() {
+      //e.preventDefault();
+      //var form = $("#formEditMovie").serialize();
+
+      //  alert($("#formEditMovie").serialize());
+      //$("#formEditMovie")
+      $.ajax({
+          type: "POST",
+          async: false,
+          cache: false,
+          url: "../Movie/Edit",
+          data: $("#formEditMovie").serialize(),
+          success: function (data) {
+
+              // data is ur summary
+              //alert(data);
+              showFilms();
+
+              //debugger;
+          }
+
+
+      });
+      // document.getElementById("formEditMovie").reset();
+      // return false;
+  }*/
 
 
 

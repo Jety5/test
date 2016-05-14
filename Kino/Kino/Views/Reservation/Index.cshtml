@@ -10,46 +10,64 @@
 
 <!--<a href="#DodajRezerwacje" id="addReservation" class="action-button shadow animate blue" style="text-decoration:none" onclick="addReservation()">Dodaj rezerwację</a>
     -->
-<table class="table table-bordered .table-hover .table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdRezerwacji)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NazwaSali)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumerMiejsca)
-        </th>       
-        <th>
-            @Html.DisplayNameFor(model => model.Rząd)
-        </th>         
-        <th></th>
-    </tr>
+<div id="wrapper">
+    @Html.Partial("_Sidebar")
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid xyz">
+            <div class="row">
+                <div class="col-lg-12">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdRezerwacji)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NazwaSali)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumerMiejsca)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rząd)
-        </td>           
-        <td>
-            <a href="#EdytujRzezerwacje" id="editReservation" class="action-button shadow animate blue" style="text-decoration:none" onclick="editReservation(@item.IdRezerwacji)">Edytuj</a>
-            <a href="#SzczegolyRezerwacji" id="detailReservation" class="action-button shadow animate blue" style="text-decoration:none" onclick="detailsReservation(@item.IdRezerwacji)">Szczegóły</a>
-            <a href="#UsunRezerwacje" class="action-button shadow animate blue" style="text-decoration:none" onclick="detailsReservation(@item.IdRezerwacji)">Usuń</a>
-        </td>
-    </tr>
-}
 
-</table>
+                    <table class="table table-bordered .table-hover .table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdRezerwacji)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NazwaSali)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NumerMiejsca)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Rząd)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdRezerwacji)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NazwaSali)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NumerMiejsca)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rząd)
+                                </td>
+                                <td>
+                                    <a href="#EdytujRzezerwacje" id="editReservation" class="action-button shadow animate blue" style="text-decoration:none" onclick="editReservation(@item.IdRezerwacji)">Edytuj</a>
+                                    <a href="#SzczegolyRezerwacji" id="detailReservation" class="action-button shadow animate blue" style="text-decoration:none" onclick="detailsReservation(@item.IdRezerwacji)">Szczegóły</a>
+                                    <a href="#UsunRezerwacje" class="action-button shadow animate blue" style="text-decoration:none" onclick="deleteReservation(@item.IdRezerwacji)">Usuń</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div id="editReservationModal" title="Edytuj rezerwację">
     <div class="editResevation"></div>
@@ -59,8 +77,8 @@
     <div class="detailsResevation"></div>
 </div>
 
-<div id="deleteModal" title="Usuń rezerwację">
-    <div class="deleteResevation"></div>
+<div id="deleteReservation" title="Usuń rezerwację">
+    <div class="deleteReservation"></div>
 </div>
 
 <div id="addModal" title="Dodaj rezerwację">
