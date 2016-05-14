@@ -228,6 +228,33 @@ function deleteReservation(id) {
    
 
 }
+function loadFilms() {
+    
+    $.ajax({
+        url: "../Repertory/getAllMovies"
+    }).done(function (data) {       
+        $('#Filmy').html(data);
+
+    });
+}
+function addRepertuar() {
+   
+    $.ajax({
+        url: "../Repertory/Create"
+    }).done(function (data) {
+        $('#addRepertory .addRepertory').html(data);
+
+    });
+
+
+    $("#addRepertory").dialog({
+        height: 450,
+        width: 470,
+        title: 'Dodaj film'
+
+
+    });
+}
 function detailsReservation(id) {
     // $('#title').html("Edytuj film");
     //  var id = $('#detailMovie').val();
@@ -411,8 +438,8 @@ function editMovie(id) {
     });
 
     $("#editModal").dialog({
-        height: 340,
-        width: 430,
+        height: 430,
+        width: 515,
         title: 'Edytuj film'
     });
 

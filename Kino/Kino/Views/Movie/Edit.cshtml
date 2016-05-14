@@ -38,8 +38,9 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Opis, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Opis, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="col-md-10" >
+            @Html.TextAreaFor(model => model.Opis, new { rows = "4", cols = "10", @class = "form-control" })
+           
             @Html.ValidationMessageFor(model => model.Opis, "", new { @class = "text-danger" })
         </div>
     </div>

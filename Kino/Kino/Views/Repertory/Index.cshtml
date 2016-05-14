@@ -9,11 +9,11 @@
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/fullcalendar.min.js"></script>
 <script src="~/Scripts/jquery-ui.custom.min.js"></script>
-
+<script src="~/Scripts/pl.js"></script>
 <script>
 
 	$(document).ready(function() {
-
+	    loadFilms();
 
 		/* initialize the external events
 		-----------------------------------------------------------------*/
@@ -40,11 +40,13 @@
 		-----------------------------------------------------------------*/
 
 		$('#calendar').fullCalendar({
+		    
 			header: {
 				left: 'prev,next today',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			lang: 'pl',
 			firstDay: 1,
 			events: {
 			    url: '../Repertory/getAllSeans',
@@ -56,8 +58,8 @@
 			    },
 
 			},
-			editable: true,
-			droppable: true, // this allows things to be dropped onto the calendar
+			editable: false,
+			droppable: false, // this allows things to be dropped onto the calendar
 			drop: function() {
 				// is the "remove after drop" checkbox checked?
 				if ($('#drop-remove').is(':checked')) {
@@ -117,39 +119,60 @@
     }
 </style>
 
-<div id="wrapper">
+<div id="wrapper" >
     @Html.Partial("_Sidebar")
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid xyz">
             <div class="row">
-                <div class="col-lg-12">
-                   
-                    <div id='wrap'>
+                <div class="col-md-1">
+                    <div id="row">
+                        <a href="#DodajFilm" id="addRepertuar" class="action-button shadow animate blue" style="text-decoration:none" onclick="addRepertuar();">Dodaj</a>
+                        <a href="#SzczegolyFilm" id="detailMovie" class="action-button shadow animate blue" style="text-decoration:none" onclick="getDetailsMovie()">Szczegóły</a>
+                        <a href="#UsunFilm" class="action-button shadow animate blue" style="text-decoration:none" onclick="deleteMovie()">Usuń</a>
+                    </div>
+                    
+                    <div id="Filmy">
+                     </div>
+                    </div>
+                    <div class="col-md-11">
 
-                        <div id='external-events'>
-                            <h4>Draggable Events</h4>
-                            <div class='fc-event'>My Event 1</div>
-                            <div class='fc-event'>My Event 2</div>
-                            <div class='fc-event'>My Event 3</div>
-                            <div class='fc-event'>My Event 4</div>
-                            <div class='fc-event'>My Event 5</div>
-                            <p>
-                                <input type='checkbox' id='drop-remove' />
-                                <label for='drop-remove'>remove after drop</label>
-                            </p>
+                        <div id='wrap'>
+
+                            <!--   <div id='external-events'>
+                       <h4>Draggable Events</h4>
+                       <div class='fc-event'>My Event 1</div>
+                       <div class='fc-event'>My Event 2</div>
+                       <div class='fc-event'>My Event 3</div>
+                       <div class='fc-event'>My Event 4</div>
+                       <div class='fc-event'>My Event 5</div>
+                       <p>
+                           <input type='checkbox' id='drop-remove' />
+                           <label for='drop-remove'>remove after drop</label>
+                       </p>
+                   </div>-->
+                           
+                            <div id='calendar'></div>
+
+                            <div style='clear:both'></div>
+
                         </div>
 
-                        <div id='calendar'></div>
-
-                        <div style='clear:both'></div>
 
                     </div>
-
-
                 </div>
-            </div>
         </div>
     </div>
  </div>
     
+<div id="detailModal" title="Szczegóły filmu">
+    <div class="detailCinema"></div>
+</div>
+
+<div id="deleteModal" title="Usuń film">
+    <div class="detailCinema"></div>
+</div>
+
+<div id="addRepertory" title="Dodaj repertuar">
+    <div class="addRepertory"></div>
+</div>

@@ -64,7 +64,7 @@ namespace Kino.Controllers
         // GET: Repertory/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Repertory/Create
@@ -72,7 +72,7 @@ namespace Kino.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Godzina,Data,Opis,FilmId,SalaId")] Seans seans)
+        public ActionResult Create([Bind(Include = "Id,Godzina,Data,Opis,FilmId,SalaId,GodzinaZakonczenia")] Seans seans)
         {
             if (ModelState.IsValid)
             {
@@ -83,6 +83,16 @@ namespace Kino.Controllers
 
             return View(seans);
         }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult getAllMovies()
+        {
+            // ModelState.Clear();
+            //Session["page"] = "movie";
+            return PartialView("tableFilm",db.Film.ToList());
+        }
+
 
         // GET: Repertory/Edit/5
         public ActionResult Edit(int? id)

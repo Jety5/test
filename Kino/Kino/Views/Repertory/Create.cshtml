@@ -1,31 +1,70 @@
 ﻿@model Kino.Models.Seans
 
-@{
-    ViewBag.Title = "Create";
-}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/jquery-2.2.0.js")"></script>
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+<script src="@Url.Content("~/Scripts/script.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
+<link href="~/Content/fullcalendar.css" rel="stylesheet" />
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/fullcalendar.min.js"></script>
+<link href="~/Content/bootstrap-clockpicker.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-clockpicker.min.js"></script>
+<script src="~/Scripts/jquery-ui.custom.min.js"></script>
+<script src="~/Scripts/pl.js"></script>
 
-<h2>Create</h2>
+<script>    
+  $(function() {
+      //var dbDate = "2012-03-06";
+     // var date2 = new Date(dbDate);
+
+      $('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+
+      $('#clockpicker').clockpicker({
+          placement: 'bottom',
+          align: 'left',
+          autoclose: true,
+          'default': 'now'
+      });
+
+      $('#clockpickerEnd').clockpicker({
+          placement: 'bottom',
+          align: 'left',
+          autoclose: true,
+          'default': 'now'
+      });
+  });
+
+</script>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Seans</h4>
-        <hr />
+       
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Godzina, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Godzina, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Godzina, new { htmlAttributes = new { @class = "form-control", id = "clockpicker" } })
                 @Html.ValidationMessageFor(model => model.Godzina, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GodzinaZakonczenia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GodzinaZakonczenia, new { htmlAttributes = new { @class = "form-control",id= "clockpickerEnd" } })
+                @Html.ValidationMessageFor(model => model.GodzinaZakonczenia, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control", id = "datepicker" } })
                 @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,16 +91,13 @@
                 @Html.EditorFor(model => model.SalaId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SalaId, "", new { @class = "text-danger" })
             </div>
-        </div>
-
+        </div>        
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-offset-9 col-md-10">
+                <input type="submit" value="Dodaj" class="action-button shadow animate blue" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+

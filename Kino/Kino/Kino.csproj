@@ -161,6 +161,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-clockpicker.min.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -174,6 +175,7 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\Main.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap-clockpicker.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -181,6 +183,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\jquery-ui.custom.min.js" />
+    <Content Include="Scripts\lang-all.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -204,6 +207,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\pl.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -238,7 +242,7 @@
     <Compile Include="Models\Sala.cs" />
     <Compile Include="Models\Seans.cs" />
     <Compile Include="ViewModels\DetailsReservationViewModel.cs" />
-    <Compile Include="ViewModels\ReservationAddViewModel.cs" />
+    <Compile Include="ViewModels\RepertoryViewModel.cs" />
     <Compile Include="ViewModels\ReservationEditViewModel.cs" />
     <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -274,6 +278,7 @@
     <Content Include="Views\Repertory\Edit.cshtml" />
     <Content Include="Views\Repertory\Index.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Repertory\tableFilm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
