@@ -92,8 +92,24 @@ namespace Kino.Controllers
             //Session["page"] = "movie";
             return PartialView("tableFilm",db.Film.ToList());
         }
+        [Authorize]
+        [HttpGet]
+        public ActionResult getAllRooms()
+        {
+            // ModelState.Clear();
+            //Session["page"] = "movie";
+            // List<string> List = new List<string>();
+            //string result = myList.Single(s => s == search);
+            int cinemaID = (int)Session["Cinema"];
 
+            var sala = from s in db.Sala
+                       where s.KinoId == cinemaID
+                       select s;
 
+            
+            return PartialView("tableRoom", sala.ToList());
+        }
+        
         // GET: Repertory/Edit/5
         public ActionResult Edit(int? id)
         {

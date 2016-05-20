@@ -47,7 +47,7 @@ namespace Kino.Controllers
         // POST: Reservation/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //http://localhost:8083/Reservation/makeReservation?seansID=16&miejsceID=1&opis=asd&pawelkosa18@gmail.com
+        //localhost:8083/Reservation/makeReservation?seanseID=16&miejsceID=1&opis=asd&e_mail=pawelkosa18@gmail.com
         [HttpGet]
         public ActionResult makeReservation(int seanseID,int miejsceID,string opis,string e_mail)
         {

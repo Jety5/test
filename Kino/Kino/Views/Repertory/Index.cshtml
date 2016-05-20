@@ -14,7 +14,7 @@
 
 	$(document).ready(function() {
 	    loadFilms();
-
+	    loadRooms();
 		/* initialize the external events
 		-----------------------------------------------------------------*/
 
@@ -79,7 +79,6 @@
 
     #wrap {
         width: 1100px;
-        margin: 0 auto;
     }
 
     #external-events {
@@ -134,23 +133,27 @@
                     <div id="Filmy">
                      </div>
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-1">
+                    <div id="Sale">
+                    </div>
+                    </div>
+                    <div class="col-md-10">
 
                         <div id='wrap'>
 
                             <!--   <div id='external-events'>
-                       <h4>Draggable Events</h4>
-                       <div class='fc-event'>My Event 1</div>
-                       <div class='fc-event'>My Event 2</div>
-                       <div class='fc-event'>My Event 3</div>
-                       <div class='fc-event'>My Event 4</div>
-                       <div class='fc-event'>My Event 5</div>
-                       <p>
-                           <input type='checkbox' id='drop-remove' />
-                           <label for='drop-remove'>remove after drop</label>
-                       </p>
-                   </div>-->
-                           
+                    <h4>Draggable Events</h4>
+                    <div class='fc-event'>My Event 1</div>
+                    <div class='fc-event'>My Event 2</div>
+                    <div class='fc-event'>My Event 3</div>
+                    <div class='fc-event'>My Event 4</div>
+                    <div class='fc-event'>My Event 5</div>
+                    <p>
+                        <input type='checkbox' id='drop-remove' />
+                        <label for='drop-remove'>remove after drop</label>
+                    </p>
+                </div>-->
+
                             <div id='calendar'></div>
 
                             <div style='clear:both'></div>

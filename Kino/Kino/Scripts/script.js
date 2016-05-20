@@ -250,6 +250,16 @@ function loadFilms() {
 
     });
 }
+function loadRooms() {
+
+    $.ajax({
+        url: "../Repertory/getAllRooms"
+    }).done(function (data) {
+        $('#Sale').html(data);
+
+    });
+}
+
 function addRepertuar() {
    
     $.ajax({

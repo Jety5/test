@@ -279,6 +279,7 @@
     <Content Include="Views\Repertory\Index.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Repertory\tableFilm.cshtml" />
+    <Content Include="Views\Repertory\tableRoom.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
