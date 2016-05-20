@@ -10,6 +10,8 @@ using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mail;
 
 namespace Kino.Controllers
 {
@@ -81,7 +83,7 @@ namespace Kino.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
+                    //sendEmail(model);
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -95,6 +97,34 @@ namespace Kino.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        
+    
+        private async Task<ActionResult> sendEmail(RegisterViewModel model)
+        {
+            var body = "<p>Twoja rejestracja przebiegła pomyślnie. Dane dostępowe do konta to: Login: "+model.Email+" Hasło: "+model.Password+ " </p>";
+            var message = new MailMessage();
+            message.To.Add(new MailAddress(model.Email));  // replace with valid value 
+            message.From = new MailAddress("jkowalskitest88@gmail.com");  // replace with valid value
+            message.Subject = "Rejestracja Kino";
+            message.Body = string.Format(body, "Rejestracje Kino", "jkowalskitest88@gmail.com");
+            message.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "jkowalskitest88@gmail.com",  // replace with valid value
+                    Password = "jkowalskitest"  // replace with valid value
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(message);
+               // return View(model);
+                 return RedirectToAction("Sent");
+            }
         }
 
         //

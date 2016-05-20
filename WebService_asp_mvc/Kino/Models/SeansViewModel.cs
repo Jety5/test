@@ -7,6 +7,7 @@ namespace Kino.Models
 {
     public class SeansViewModel
     {
+        public int Id { get; set; }
         public string Godzina { get; set; }
         public string Data { get; set; }
         public string Opis { get; set; }

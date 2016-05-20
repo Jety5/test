@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Kino.DAL;
 using Kino.Models;
+using System.Net.Mail;
+using System.Configuration;
 
 namespace Kino.Controllers
 {
@@ -45,18 +47,66 @@ namespace Kino.Controllers
         // POST: Reservation/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Godzina,Data,Opis,FilmId,SalaId")] Seans seans)
+        //http://localhost:8083/Reservation/makeReservation?seansID=16&miejsceID=1&opis=asd&pawelkosa18@gmail.com
+        [HttpGet]
+        public ActionResult makeReservation(int seanseID,int miejsceID,string opis,string e_mail)
         {
-            if (ModelState.IsValid)
-            {
-                db.Seans.Add(seans);
+            if (opis != String.Empty) {
+
+                Seans seans = db.Seans.Find(seanseID);
+                Sala sala = db.Sala.Find(seans.SalaId);
+
+
+                Miejsce miejesce = db.Miejsce.Find(miejsceID);
+
+                RezerwacjaZlozona rezerwacja = new RezerwacjaZlozona();
+                rezerwacja.Miejsce = miejesce;
+                rezerwacja.Opis = opis;
+                rezerwacja.SeansId = (int)seanseID;
+                
+                db.RezerwacjaZlozona.Add(rezerwacja);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+               // Seans seans = db.Seans.Find(seanseID);
+                Film film = db.Film.Find(seans.FilmId);
+                using (MailMessage mail = new MailMessage())
+                {
+                    mail.From = new MailAddress(ConfigurationManager.AppSettings["mailAccount"]);
+                    mail.To.Add(e_mail);
+                    mail.Subject = "Rezerwacja została przyjeta";
+                   mail.Body = "Twoja rezerwacja na film <strong>"+film.Tytuł + " </strong>na godz. <strong>"+seans.Godzina +"</strong>, miejsce: <strong>"+miejesce.Numer+"</strong>, rzad: <strong>"+miejesce.Rząd+"</strong> została przyjęta";
+                   // mail.Body = "Rezerwacja została przyjęta";
+                     mail.IsBodyHtml = true;
+                    // Can set to false, if you are sending pure text.
+
+                    //  mail.Attachments.Add(new Attachment("C:\\SomeFile.txt"));
+                    //  mail.Attachments.Add(new Attachment("C:\\SomeZip.zip"));
+
+                    using (SmtpClient smtp = new SmtpClient())
+                    {
+                        smtp.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["mailAccount"], ConfigurationManager.AppSettings["mailPassword"]);
+                        smtp.EnableSsl = true;
+                        smtp.Send(mail);
+                    }
+                }
+
+                RezerwacjaPrzyjeta rezerwacjaPrzyjeta = new RezerwacjaPrzyjeta();
+
+                rezerwacjaPrzyjeta.Miejsce = miejesce;
+                rezerwacjaPrzyjeta.Opis = opis;
+                rezerwacjaPrzyjeta.SeansId = (int)seanseID;
+
+                db.RezerwacjaPrzyjeta.Add(rezerwacjaPrzyjeta);
+                db.SaveChanges();
+                return Json("1", JsonRequestBehavior.AllowGet);
             }
 
-            return View(seans);
+            return Json("0", JsonRequestBehavior.AllowGet);
+            //db.SaveChanges();
+
+
+
+            //return View(seans);
         }
 
         // GET: Reservation/Edit/5

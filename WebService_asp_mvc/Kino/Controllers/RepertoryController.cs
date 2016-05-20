@@ -31,6 +31,7 @@ namespace Kino.Controllers
                          where sala.KinoId == CinemaId
                          select new SeansViewModel()
                                   {
+                                      Id = seans.Id,
                                       Data = seans.Data,
                                       Godzina = seans.Godzina,
                                       Opis = seans.Opis,
@@ -38,7 +39,9 @@ namespace Kino.Controllers
                                       OpisFilmu = film.Opis,
                                       RezyserFilmu = film.Reżyser,
                                       RokFilmu = (film.Rok).ToString(),
-                                      NazwaSali = sala.Nazwa                                  
+                                      NazwaSali = sala.Nazwa,
+                                      SalaId = sala.Id     
+                                                                   
 
                          };
 

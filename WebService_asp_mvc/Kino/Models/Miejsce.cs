@@ -13,6 +13,7 @@ namespace Kino.Models
         public int SalaId { get; set; }
         public int RezerwacjaZlozonaId { get; set; }
         public int RezerwacjaPrzyjetaId { get; set; }
-        
+
+      
     }
 }

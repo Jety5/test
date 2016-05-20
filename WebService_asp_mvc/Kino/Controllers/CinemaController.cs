@@ -1,4 +1,5 @@
 ﻿using Kino.DAL;
+using Kino.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,22 @@ namespace Kino.Controllers
             return Json(cinema, JsonRequestBehavior.AllowGet);
         }
 
-        
-        
+        //http://localhost:55760/Cinema/getCinemaHallId?CinemaId=1
+        [HttpGet]
+        public ActionResult getCinemaHallId(int CinemaId)
+        {
+            var hallCinemaList = from sala in db.Sala                                 
+                                  where sala.KinoId == CinemaId
+                                  select new ReservationViewModel()
+                                  {
+                                      SalaId = sala.Id,
+                                   
+                                  };
+            //  string json = JsonConvert.SerializeObject(cinema);
+            return Json(hallCinemaList, JsonRequestBehavior.AllowGet);
+        }
+       
+
         /*[HttpGet]
         public ActionResult deleteCinemaById(int idCinema)
         {
@@ -57,6 +72,6 @@ namespace Kino.Controllers
             return View("Index", cinema);
         }*/
 
-        
+
     }
 }
