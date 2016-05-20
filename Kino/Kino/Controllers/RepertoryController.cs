@@ -126,30 +126,53 @@ namespace Kino.Controllers
         }
 
         // GET: Repertory/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpGet]
+        public ActionResult Delete()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Seans seans = db.Seans.Find(id);
-            if (seans == null)
-            {
-                return HttpNotFound();
-            }
-            return View(seans);
+            int cinemaID = (int)Session["Cinema"];
+
+            var seanse = from seans in db.Seans
+                         join film in db.Film on seans.FilmId equals film.Id
+                         join sala in db.Sala on seans.SalaId equals sala.Id
+                         where sala.KinoId == cinemaID
+                         select new RepertoryViewModel()
+                         {
+                             Id = seans.Id,
+                             Data = seans.Data,
+                             Godzina = seans.Godzina,
+                             GodzinaZakonczenia = seans.GodzinaZakonczenia,
+                             Opis = seans.Opis,
+                             Film = film.Tytuł
+                         };
+
+            
+            return PartialView(seanse);
         }
 
-        // POST: Repertory/Delete/5
-       /* [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpGet]
+        public ActionResult deleteRepertoryById(int idSeans)
         {
-            Seans seans = db.Seans.Find(id);
-            db.Seans.Remove(seans);
+            // int cinemaID = (int)Session["Cinema"];
+
+            Seans senas = db.Seans.Find(idSeans);
+            db.Seans.Remove(senas);
             db.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
+
+
+            return Json("1", JsonRequestBehavior.AllowGet);
+        }
+        
+
+        // POST: Repertory/Delete/5
+        /* [HttpPost, ActionName("Delete")]
+         [ValidateAntiForgeryToken]
+         public ActionResult DeleteConfirmed(int id)
+         {
+             Seans seans = db.Seans.Find(id);
+             db.Seans.Remove(seans);
+             db.SaveChanges();
+             return RedirectToAction("Index");
+         }*/
 
 
         [HttpGet]

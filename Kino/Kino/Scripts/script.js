@@ -135,7 +135,20 @@ function deleteCinema() {
     });
     //$('#Cinema').empty();
 }
+function deleteMovieRepertory() {
+    //$(".col-md-4 text-center Cinema").html();
+    idSeans = $("#deleteMovieRepertory").val();
 
+    $.ajax({
+        url: "/Repertory/deleteRepertoryById?idSeans=" + idSeans
+    }).done(function (data) {
+
+        location.reload();
+        //$("#cinemaList").html(data);
+
+    });
+    //$('#Cinema').empty();
+}
 //getMovieList
 $( "#Movies" ).click(function() {
 
@@ -405,6 +418,8 @@ function deleteReservationForm(id) {
 
 }
 
+
+
 $("#formEditMovie").find("#editMovieButton").click(function () {
 
 
@@ -450,6 +465,23 @@ function deleteMovie(id) {
     //  var id = $('#detailMovie').val();
     $.ajax({
         url: "../Movie/Delete?id=" + id
+    }).done(function (data) {
+        $('#deleteModal .detailCinema').html(data);
+
+    });
+
+
+    $("#deleteModal").dialog({
+        title: 'Usun film'
+    });
+
+}
+
+function deleteRepertory() {
+    //$('#title').html("Szczegóły filmu");
+    //  var id = $('#detailMovie').val();
+    $.ajax({
+        url: "../Repertory/Delete"
     }).done(function (data) {
         $('#deleteModal .detailCinema').html(data);
 
